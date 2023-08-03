@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
 import { Auth } from './models/auth.model';
+import { FilesService } from './services/files.service';
 
 //decorador ->comportamiento de la clase
 @Component({
@@ -14,10 +15,12 @@ export class AppComponent {
   imgParent = '';
   showImg = true;
   token = '';
+  imgRta = '';
 
   constructor(
     private authService: AuthService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private fileService: FilesService
   ) {}
 
   onLoaded(img: string) {
@@ -48,10 +51,29 @@ export class AppComponent {
   }
 
   getProfile() {
-    this.authService.profile()
-    .subscribe(profile => {
+    this.authService.profile().subscribe((profile) => {
       console.log(profile);
-    })
+    });
+  }
+
+  downloadPDF() {
+    this.fileService
+      .getFile(
+        'my.pdf',
+        'https://young-sands-07814.herokuapp.com/api/files/dummy.pdf',
+        'application/pdf'
+      )
+      .subscribe();
+  }
+
+  onUpload(event: Event) {
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0);
+    if (file) {
+      this.fileService.uploadFile(file).subscribe((rta) => {
+        this.imgRta = rta.location;
+      });
+    }
   }
 
   // widthImg = 10;
