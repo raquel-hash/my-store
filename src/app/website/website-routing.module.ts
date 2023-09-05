@@ -23,13 +23,13 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
       },
-      // {
-      //   path: 'category',
-      //   loadChildren: () =>
-      //     import('./pages/category/category.module').then(
-      //       (m) => m.CategoryModule
-      //     ),
-      // },
+      {
+        path: 'category',
+        loadChildren: () =>
+          import('./pages/category/category.module').then(
+            (m) => m.CategoryModule
+          ),
+      },
       {
         path: 'product/:id',
         component: ProductDetailComponent,
