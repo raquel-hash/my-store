@@ -11,28 +11,17 @@ import { RegisterComponent } from './pages/register/register.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
-import { ImgComponent } from './components/img/img.component';
-import { ProductComponent } from './components/product/product.component';
 import { NavComponent } from './components/nav/nav.component';
-import { ReversePipe } from './pipes/reverse.pipe';
-import { TimeAgoPipe } from './pipes/time-ago.pipe';
-import { HighlightDirective } from './directives/highlight.directive';
-import { ProductsComponent } from './components/products/products.component';
 
 import { SwiperModule } from 'swiper/angular';
 import { LayoutComponent } from './components/layout/layout.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    ImgComponent,
-    ProductComponent,
-    ProductsComponent,
     HeaderComponent,
     NavComponent,
-    ReversePipe,
-    TimeAgoPipe,
-    HighlightDirective,
     HomeComponent,
     CategoryComponent,
     MycartComponent,
@@ -43,6 +32,6 @@ import { LayoutComponent } from './components/layout/layout.component';
     ProductDetailComponent,
     LayoutComponent,
   ],
-  imports: [CommonModule, WebsiteRoutingModule, SwiperModule],
+  imports: [CommonModule, WebsiteRoutingModule, SwiperModule, SharedModule],
 })
 export class WebsiteModule {}
