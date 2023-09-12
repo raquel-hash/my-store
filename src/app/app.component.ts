@@ -37,6 +37,7 @@ export class AppComponent {
         name: 'Raquel',
         email: 'raquel@gamil.com',
         password: '12345',
+        role: 'customer',
       })
       .subscribe((rta) => {
         console.log(rta);
@@ -51,7 +52,7 @@ export class AppComponent {
   }
 
   getProfile() {
-    this.authService.profile().subscribe((profile) => {
+    this.authService.getProfile().subscribe((profile) => {
       console.log(profile);
     });
   }
