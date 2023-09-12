@@ -15,6 +15,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { SwiperModule } from 'swiper/angular';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SharedModule } from '../shared/shared.module';
+import { QuicklinkModule } from 'ngx-quicklink';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,18 @@ import { SharedModule } from '../shared/shared.module';
     MycartComponent,
     LoginComponent,
     RegisterComponent,
+
     RecoveryComponent,
     ProfileComponent,
     ProductDetailComponent,
     LayoutComponent,
   ],
-  imports: [CommonModule, WebsiteRoutingModule, SwiperModule, SharedModule],
+  imports: [
+    CommonModule,
+    WebsiteRoutingModule,
+    SwiperModule,
+    SharedModule,
+    QuicklinkModule,
+  ],
 })
 export class WebsiteModule {}
