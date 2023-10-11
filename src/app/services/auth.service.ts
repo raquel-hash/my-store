@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpParams,
-  HttpErrorResponse,
-  HttpStatusCode,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environmet';
 import { Auth } from '../models/auth.model';
 import { User } from '../models/user.model';
@@ -31,10 +25,16 @@ export class AuthService {
   }
 
   getProfile() {
-    return this.http.get<User>(`${this.apiUrl}/profile`);
+    return this.http
+      .get<User>(`${this.apiUrl}/profile`)
+      .pipe(tap((user) => this.user.next(user)));
   }
 
   loginAndGet(email: string, password: string) {
     return this.login(email, password).pipe(switchMap(() => this.getProfile()));
+  }
+
+  logout() {
+    this.tokenService.removeToken();
   }
 }

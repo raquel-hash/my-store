@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/product.model';
 import { da } from 'date-fns/locale';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -21,7 +22,8 @@ export class NavComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private authService: AuthService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,9 @@ export class NavComponent implements OnInit {
       this.counter = products.length;
     });
     this.getAllCategories();
+    this.authService.user$.subscribe((data) => {
+      this.profile = data;
+    });
   }
 
   toggleMenu() {
@@ -36,16 +41,22 @@ export class NavComponent implements OnInit {
   }
 
   login() {
-    this.authService.loginAndGet('john@mail.com', 'changeme').subscribe((user) => {
+    this.authService.loginAndGet('maria@mail.com', '12345').subscribe(() => {
       // console.log(rta.access_token);
-      this.profile = user;
+      // this.profile = user;
+      this.router.navigate(['/profile']);
     });
   }
 
   getAllCategories() {
-    this.categoriesService.getAll()
-    .subscribe((data) => {
+    this.categoriesService.getAll().subscribe((data) => {
       this.categories = data;
-    })
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.profile = null;
+    this.router.navigate(['/home']);
   }
 }

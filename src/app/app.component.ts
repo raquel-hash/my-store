@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // import {Product} from './product.model'
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
 import { Auth } from './models/auth.model';
 import { FilesService } from './services/files.service';
+import { TokenService } from './services/token.service';
 
 //decorador ->comportamiento de la clase
 @Component({
@@ -11,7 +12,7 @@ import { FilesService } from './services/files.service';
   template: '<router-outlet></router-outlet>',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   imgParent = '';
   showImg = true;
   token = '';
@@ -20,8 +21,16 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
-    private fileService: FilesService
+    private fileService: FilesService,
+    private tokenService: TokenService
   ) {}
+
+  ngOnInit(): void {
+    const token = this.tokenService.getToken();
+    if (token) {
+      this.authService.getProfile().subscribe();
+    }
+  }
 
   onLoaded(img: string) {
     console.log('Log padre', img);
