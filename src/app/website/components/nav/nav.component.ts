@@ -41,7 +41,7 @@ export class NavComponent implements OnInit {
   }
 
   login() {
-    this.authService.loginAndGet('maria@mail.com', '12345').subscribe(() => {
+    this.authService.loginAndGet('admin@mail.com', 'admin123').subscribe(() => {
       // console.log(rta.access_token);
       // this.profile = user;
       this.router.navigate(['/profile']);
