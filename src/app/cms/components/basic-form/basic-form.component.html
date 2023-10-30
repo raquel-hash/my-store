@@ -1,11 +1,24 @@
 <p>
-  Name: {{ nameField.value }}
+  Name: {{ nameField.value }} {{ nameField.valid }}
   <input type="text" [formControl]="nameField" />
 
   <!-- <code>
     <pre>{{ nameField | json }}</pre>
   </code> -->
-  <button (click)="getNameValue()">Get value</button>
+  <button (click)="getNameValue()" [disabled]="nameField.invalid">
+    Get value
+  </button>
+</p>
+<p>
+  <strong *ngIf="nameField.touched && nameField.hasError('required')"
+    >Este campo es requerido</strong
+  >
+</p>
+
+<p>
+  <strong *ngIf="nameField.touched && nameField.hasError('maxlength')"
+    >Debe tener maximo 10 caracteres</strong
+  >
 </p>
 
 <p>
@@ -61,25 +74,35 @@
 <p>
   Gender: {{ genderField.value }}
   <label
-    >Male <input name="gender" type="radio" value="male" [formControl]="genderField"
+    >Male
+    <input name="gender" type="radio" value="male" [formControl]="genderField"
   /></label>
   <label
-    >Female <input name="gender" type="radio" value="female" [formControl]="genderField"
+    >Female
+    <input
+      name="gender"
+      type="radio"
+      value="female"
+      [formControl]="genderField"
   /></label>
   <label
-    >Other <input name="gender" type="radio" value="other" [formControl]="genderField"
+    >Other
+    <input name="gender" type="radio" value="other" [formControl]="genderField"
   /></label>
 </p>
 
 <p>
   Zone: {{ zoneField.value }}
   <label
-    >Zona 1 <input name="zone" type="radio" value="zona-1" [formControl]="zoneField"
+    >Zona 1
+    <input name="zone" type="radio" value="zona-1" [formControl]="zoneField"
   /></label>
   <label
-    >Zona 2 <input name="zone" type="radio" value="zona-2" [formControl]="zoneField"
+    >Zona 2
+    <input name="zone" type="radio" value="zona-2" [formControl]="zoneField"
   /></label>
   <label
-    >Zona 3 <input name="zone" type="radio" value="zona-3" [formControl]="zoneField"
+    >Zona 3
+    <input name="zone" type="radio" value="zona-3" [formControl]="zoneField"
   /></label>
 </p>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
@@ -7,7 +7,10 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./basic-form.component.scss'],
 })
 export class BasicFormComponent {
-  nameField = new FormControl('');
+  nameField = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(10),
+  ]);
   emailField = new FormControl('');
   phoneField = new FormControl('');
   colorField = new FormControl('#000000');
@@ -22,8 +25,6 @@ export class BasicFormComponent {
   genderField = new FormControl();
 
   zoneField = new FormControl();
-
-
 
   ngOnInit() {
     this.nameField.valueChanges.subscribe((value) => {
